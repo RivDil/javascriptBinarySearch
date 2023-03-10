@@ -11,6 +11,7 @@ class Tree {
     this.sorted_arr = [...new Set(array)].sort(function(a,b){return a-b})
     this.root = this.buildTree(this.sorted_arr)
   }
+  //Write a buildTree
   buildTree(sorted_arr){
     if (sorted_arr.length === 0) return null;
     const mid = Math.floor(sorted_arr.length/2)
@@ -19,6 +20,27 @@ class Tree {
     const newNode = new Node(sorted_arr[mid], this.buildTree(leftHalf), this.buildTree(rightHalf));
     return newNode
   }
+  //Write an insert and delete
+  insert(value){
+    let current = this.root;
+    let previous;
+    while(current){
+      previous = current
+      if(value<current.value){
+        current = current.left
+      }else if(value > current.value){
+        current = current.right
+      }else{
+        return
+      }
+    }
+    if(value < previous.value){
+      previous.left = new Node(value);
+    }else{
+      previous.right = new Node(value);
+    }
+  }
+
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -32,7 +54,11 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 };
 
 
-const array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+const array = [1,2,8,3,7,5]
 const tree = new Tree(array)
+tree.insert(6)
+tree.insert(4)
+tree.insert(9)
+tree.insert(20)
 prettyPrint(tree.root)
 
