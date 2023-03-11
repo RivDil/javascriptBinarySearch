@@ -40,6 +40,38 @@ class Tree {
       previous.right = new Node(value);
     }
   }
+  // delete on the work
+  //Write a find function which accepts a value and returns the node with the given value.
+
+  find(value){
+    let current = this.root;
+    while(current){
+      if(value<current.value){
+        current = current.left
+      }else if(value > current.value){
+        current = current.right
+      }else{
+        return current
+      }
+    }
+    return null
+  }
+
+  //Write a levelOrder function which accepts another function as a parameter.
+
+  levelOrder(){
+    let levelOrderArray = [];
+    let queve = [];
+    queve.push(this.root);  //5
+    while(queve.length > 0){ //[node(5)]
+      let node = queve[0]; // i take the first node on the array
+      levelOrderArray.push(node.value) //push it's value [5]
+      if(node.left){queve.push(node.left)} // [node(5), node(2)]
+      if(node.right){queve.push(node.right)} // [node(5),node(2), node(8)]
+      queve.shift(); //[node(2),node(8)]
+    }
+    return levelOrderArray;
+  }
 
 }
 
@@ -61,4 +93,6 @@ tree.insert(4)
 tree.insert(9)
 tree.insert(20)
 prettyPrint(tree.root)
+console.log(tree.find(8))
+console.log(tree.levelOrder())
 
