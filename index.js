@@ -59,8 +59,7 @@ class Tree {
 
   //Write a levelOrder function which accepts another function as a parameter.
 
-  levelOrder(){
-    let levelOrderArray = [];
+  levelOrder(levelOrderArray = []){
     let queve = [];
     queve.push(this.root);  //5
     while(queve.length > 0){ //[node(5)]
@@ -71,6 +70,44 @@ class Tree {
       queve.shift(); //[node(2),node(8)]
     }
     return levelOrderArray;
+  }
+
+  // Write inorder, preorder, and postorder
+
+  inorder(arr = [], root = this.root) {
+    if (root === null) return;
+    
+    if (root.left) this.inorder(arr, root.left);
+    
+    arr.push(root.value);
+
+    if (root.right) this.inorder(arr, root.right);
+   
+    return arr;
+  }
+
+  preorder(arr = [], root = this.root) {
+    if (root === null) return;
+
+    arr.push(root.value);
+
+    if (root.left) this.preorder(arr, root.left);
+    
+    if (root.right) this.preorder(arr, root.right);
+    
+    return arr;
+  }
+
+  postorder(arr = [], root = this.root) {
+    if (root === null) return;
+
+    if (root.left) this.postorder(arr, root.left);
+
+    if (root.right) this.postorder(arr, root.right);
+  
+    arr.push(root.value);
+
+    return arr;
   }
 
 }
@@ -95,4 +132,7 @@ tree.insert(20)
 prettyPrint(tree.root)
 console.log(tree.find(8))
 console.log(tree.levelOrder())
+console.log(tree.inorder())
+console.log(tree.preorder())
+console.log(tree.postorder())
 
