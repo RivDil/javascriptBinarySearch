@@ -109,6 +109,17 @@ class Tree {
 
     return arr;
   }
+  //Write a height function which accepts a node and returns its height.
+  height(node = this.root){
+    if (node === null) return 0;
+    if (node.left === null && node.right === null){
+      return 0
+    }
+    const lh = this.height(node.left);
+    const rh = this.height(node.right);
+    return Math.max(lh,rh) +1
+  }
+
 
 }
 
@@ -135,4 +146,5 @@ console.log(tree.levelOrder())
 console.log(tree.inorder())
 console.log(tree.preorder())
 console.log(tree.postorder())
+console.log(tree.height());
 
