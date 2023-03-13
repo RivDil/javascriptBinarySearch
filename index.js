@@ -122,9 +122,17 @@ class Tree {
   //Write a depth function which accepts a node and returns its depth.
   depth(node, root = this.root, counter = 0) {
     if (node === null){return 0}
-    if (node === root){return counter}
+    if (node === root){return 'Depth of ' + node.value + ': ' + counter}
     if(node.value < root.value){return this.depth(node,root.left,counter +=1)}
     if(node.value > root.value){return this.depth(node,root.right,counter +=1)}
+  }
+  //Write a isBalanced function which checks if the tree is balanced.
+  isBalanced(root = this.root){
+    if (root === null){return 0}
+    const lh = this.height(root.left);
+    const rh = this.height(root.right);
+    if (rh != lh){return false}
+    else{return true}
   }
 
 }
@@ -152,6 +160,7 @@ console.log(tree.levelOrder())
 console.log(tree.inorder())
 console.log(tree.preorder())
 console.log(tree.postorder())
-console.log(tree.height(tree.find(2)));
+console.log(tree.height());
 console.log(tree.depth(tree.find(8)));
+console.log(tree.isBalanced());
 
