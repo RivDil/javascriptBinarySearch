@@ -111,7 +111,7 @@ class Tree {
   }
   //Write a height function which accepts a node and returns its height.
   height(node = this.root){
-    if (node === null) return 0;
+    if (node === null) return -1;
     if (node.left === null && node.right === null){
       return 0
     }
@@ -119,7 +119,13 @@ class Tree {
     const rh = this.height(node.right);
     return Math.max(lh,rh) +1
   }
-
+  //Write a depth function which accepts a node and returns its depth.
+  depth(node, root = this.root, counter = 0) {
+    if (node === null){return 0}
+    if (node === root){return counter}
+    if(node.value < root.value){return this.depth(node,root.left,counter +=1)}
+    if(node.value > root.value){return this.depth(node,root.right,counter +=1)}
+  }
 
 }
 
@@ -146,5 +152,6 @@ console.log(tree.levelOrder())
 console.log(tree.inorder())
 console.log(tree.preorder())
 console.log(tree.postorder())
-console.log(tree.height());
+console.log(tree.height(tree.find(2)));
+console.log(tree.depth(tree.find(8)));
 
