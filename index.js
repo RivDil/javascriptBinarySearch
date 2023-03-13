@@ -131,8 +131,18 @@ class Tree {
     if (root === null){return 0}
     const lh = this.height(root.left);
     const rh = this.height(root.right);
-    if (rh != lh){return false}
+    if (Math.abs(rh - lh) >= 2 && Math.abs(rh - lh) <= 0 ){return false}
     else{return true}
+  }
+  //Write a rebalance function which rebalances an unbalanced tree. 
+  rebalance(root = this.root){
+    if (root === null){return null}
+    else if(this.isBalanced()){return 'the tree is balanced'}
+    else{
+      let newTree = new Tree(this.preorder());
+      console.log(newTree)
+      return newTree
+    }
   }
 
 }
@@ -148,7 +158,7 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 };
 
 
-const array = [1,2,8,3,7,5]
+const array = [1,2,8,3,7,5,6]
 const tree = new Tree(array)
 tree.insert(6)
 tree.insert(4)
